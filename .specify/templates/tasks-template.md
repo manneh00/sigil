@@ -45,14 +45,18 @@
 ## Phase 3.1: Setup
 - [ ] T001 Create project structure per implementation plan
 - [ ] T002 Initialize [language] project with [framework] dependencies
-- [ ] T003 [P] Configure linting and formatting tools
+- [ ] T003 [P] Configure linting and formatting tools (Constitution II requirement)
 
-## Phase 3.2: Tests First (TDD) ⚠️ MUST COMPLETE BEFORE 3.3
-**CRITICAL: These tests MUST be written and MUST FAIL before ANY implementation**
+## Phase 3.2: Tests First (TDD) ⚠️ CONSTITUTIONAL REQUIREMENT
+**NON-NEGOTIABLE (Constitution I): Tests MUST be written and MUST FAIL before ANY implementation**
 - [ ] T004 [P] Contract test POST /api/users in tests/contract/test_users_post.py
 - [ ] T005 [P] Contract test GET /api/users/{id} in tests/contract/test_users_get.py
 - [ ] T006 [P] Integration test user registration in tests/integration/test_registration.py
 - [ ] T007 [P] Integration test auth flow in tests/integration/test_auth.py
+
+**Verification Required:**
+- Run tests to confirm they FAIL (Red phase)
+- Document failure output before proceeding to Phase 3.3
 
 ## Phase 3.3: Core Implementation (ONLY after tests are failing)
 - [ ] T008 [P] User model in src/models/user.py
@@ -71,9 +75,9 @@
 
 ## Phase 3.5: Polish
 - [ ] T019 [P] Unit tests for validation in tests/unit/test_validation.py
-- [ ] T020 Performance tests (<200ms)
-- [ ] T021 [P] Update docs/api.md
-- [ ] T022 Remove duplication
+- [ ] T020 Performance tests (<200ms p95 - Constitution IV requirement)
+- [ ] T021 [P] Update docs/api.md with usage examples (Constitution V requirement)
+- [ ] T022 Remove duplication (Constitution II - DRY principle)
 - [ ] T023 Run manual-testing.md
 
 ## Dependencies

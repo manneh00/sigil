@@ -1,8 +1,8 @@
 
-# Implementation Plan: [FEATURE]
+# Implementation Plan: AI Image Editing Canvas Library
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**Branch**: `001-i-want-to` | **Date**: 2025-10-02 | **Spec**: [spec.md](./spec.md)
+**Input**: Feature specification from `/Users/manny/alchemic-transmutation/specs/001-i-want-to/spec.md`
 
 ## Execution Flow (/plan command scope)
 ```
@@ -31,110 +31,96 @@
 - Phase 3-4: Implementation execution (manual or via tools)
 
 ## Summary
-[Extract from feature spec: primary requirement + technical approach from research]
+Build an embeddable React canvas library for AI image editing that enables mask creation through multiple drawing tools (brush, magnetic brush, outline, eraser), layer management, and lossless zoom. The library will be a single-page application using Next.js, React, Tailwind CSS, and shadcn/ui components with no backend dependencies. Users can load images, create mask layers, manage layer stacking/colors, and export mask data for AI model processing.
 
 ## Technical Context
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: TypeScript 5.x with React 18.x and Next.js 14.x
+**Primary Dependencies**: Next.js, React, Tailwind CSS, shadcn/ui components, HTML5 Canvas API
+**Storage**: Browser localStorage for undo/redo history, no backend persistence
+**Testing**: Vitest for unit tests, React Testing Library for component tests, Playwright for E2E
+**Target Platform**: Modern web browsers (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
+**Project Type**: single (frontend-only SPA, no backend)
+**Performance Goals**: 60fps canvas rendering, <100ms zoom operations, <50ms layer reordering
+**Constraints**: <200ms p95 for drawing operations, 20MB max image size, client-side only processing
+**Scale/Scope**: Single-page app, ~10-15 React components, embeddable library component
 
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
 **I. Test-Driven Development (TDD)**
-- [ ] Contract tests planned BEFORE implementation tasks
-- [ ] Integration tests planned BEFORE feature implementation
-- [ ] All test tasks ordered to fail first (Red phase)
-- [ ] Implementation tasks explicitly depend on failing tests
+- [x] Contract tests planned BEFORE implementation tasks
+- [x] Integration tests planned BEFORE feature implementation
+- [x] All test tasks ordered to fail first (Red phase)
+- [x] Implementation tasks explicitly depend on failing tests
 
 **II. Code Quality Standards**
-- [ ] Linting/formatting setup included in Phase 3.1
-- [ ] No functions planned > 50 lines (flag for review)
-- [ ] Type annotations/signatures included in all API contracts
-- [ ] Explicit error handling designed in contracts
+- [x] Linting/formatting setup included in Phase 3.1 (ESLint, Prettier for TypeScript/React)
+- [x] No functions planned > 50 lines (component hooks and rendering logic will be modular)
+- [x] Type annotations/signatures included in all API contracts (TypeScript interfaces)
+- [x] Explicit error handling designed in contracts (image loading, file size validation)
 
 **III. User Experience Consistency**
-- [ ] Error message design included in contracts
-- [ ] UI/UX patterns documented if user-facing
-- [ ] Migration guide planned if breaking user-facing changes
-- [ ] Accessibility requirements identified (if applicable)
+- [x] Error message design included in contracts (actionable messages per UX-001)
+- [x] UI/UX patterns documented if user-facing (tool selection, layer management)
+- [x] Migration guide planned if breaking user-facing changes (N/A for initial release)
+- [x] Accessibility requirements identified (WCAG 2.1 AA - keyboard navigation, ARIA labels)
 
 **IV. Performance Requirements**
-- [ ] Performance targets defined in Technical Context (< 200ms p95)
-- [ ] Database indexing strategy included (if applicable)
-- [ ] Async operations identified for resource-intensive tasks
-- [ ] Performance test tasks included in Phase 3.5
+- [x] Performance targets defined in Technical Context (< 200ms p95, 60fps rendering)
+- [x] Database indexing strategy included (N/A - client-side only)
+- [x] Async operations identified for resource-intensive tasks (image loading, magnetic brush AI)
+- [x] Performance test tasks included in Phase 3.5 (rendering benchmarks, zoom tests)
 
 **V. Documentation Standards**
-- [ ] API usage examples planned in quickstart.md
-- [ ] Architecture decisions documented in research.md
-- [ ] README update task included if needed
-- [ ] Complex algorithm documentation identified
+- [x] API usage examples planned in quickstart.md (load image, draw mask, export data)
+- [x] Architecture decisions documented in research.md (canvas strategy, state management)
+- [x] README update task included if needed (library integration guide)
+- [x] Complex algorithm documentation identified (magnetic brush SAM integration, undo/redo)
 
 ## Project Structure
 
 ### Documentation (this feature)
 ```
-specs/[###-feature]/
+specs/001-i-want-to/
 ├── plan.md              # This file (/plan command output)
 ├── research.md          # Phase 0 output (/plan command)
 ├── data-model.md        # Phase 1 output (/plan command)
 ├── quickstart.md        # Phase 1 output (/plan command)
 ├── contracts/           # Phase 1 output (/plan command)
+│   ├── CanvasAPI.ts
+│   ├── LayerManager.ts
+│   └── ToolSystem.ts
 └── tasks.md             # Phase 2 output (/tasks command - NOT created by /plan)
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
 src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+├── components/          # React components
+│   ├── Canvas/          # Main canvas component
+│   ├── Toolbar/         # Tool selection UI
+│   ├── LayerPanel/      # Layer management sidebar
+│   └── ui/              # shadcn/ui components
+├── lib/                 # Core library logic
+│   ├── canvas/          # Canvas rendering engine
+│   ├── tools/           # Drawing tools (brush, eraser, etc.)
+│   ├── layers/          # Layer management system
+│   └── history/         # Undo/redo state management
+├── types/               # TypeScript type definitions
+├── hooks/               # Custom React hooks
+└── app/                 # Next.js app directory
+    ├── page.tsx         # Main application page
+    └── layout.tsx       # Root layout
 
 tests/
-├── contract/
-├── integration/
-└── unit/
+├── contract/            # API contract tests
+├── integration/         # Component integration tests
+└── unit/                # Unit tests for lib/
 
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+public/                  # Static assets
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: Single project structure (frontend-only). This is a Next.js application with the App Router, organized into reusable library code (`src/lib/`) and React components (`src/components/`). The main application lives in `src/app/` as a single-page demo. Tests are organized by type (contract, integration, unit) with contract tests verifying TypeScript interfaces and integration tests validating component interactions.
 
 ## Phase 0: Outline & Research
 1. **Extract unknowns from Technical Context** above:
@@ -230,18 +216,18 @@ directories captured above]
 *This checklist is updated during execution flow*
 
 **Phase Status**:
-- [ ] Phase 0: Research complete (/plan command)
-- [ ] Phase 1: Design complete (/plan command)
-- [ ] Phase 2: Task planning complete (/plan command - describe approach only)
-- [ ] Phase 3: Tasks generated (/tasks command)
+- [x] Phase 0: Research complete (/plan command)
+- [x] Phase 1: Design complete (/plan command)
+- [x] Phase 2: Task planning complete (/plan command - describe approach only)
+- [x] Phase 3: Tasks generated (/tasks command)
 - [ ] Phase 4: Implementation complete
 - [ ] Phase 5: Validation passed
 
 **Gate Status**:
-- [ ] Initial Constitution Check: PASS
-- [ ] Post-Design Constitution Check: PASS
-- [ ] All NEEDS CLARIFICATION resolved
-- [ ] Complexity deviations documented
+- [x] Initial Constitution Check: PASS
+- [x] Post-Design Constitution Check: PASS
+- [x] All NEEDS CLARIFICATION resolved
+- [x] Complexity deviations documented (none required)
 
 ---
 *Based on Constitution v1.0.0 - See `.specify/memory/constitution.md`*
