@@ -69,7 +69,7 @@ When creating this spec from a user prompt:
 
 ### Functional Requirements
 - **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
+- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]
 - **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
 - **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
 - **FR-005**: System MUST [behavior, e.g., "log all security events"]
@@ -77,6 +77,16 @@ When creating this spec from a user prompt:
 *Example of marking unclear requirements:*
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+
+### Performance Requirements *(include if applicable)*
+- **PF-001**: [Operation] MUST complete within [time] (p95 latency < 200ms per constitution)
+- **PF-002**: System MUST handle [scale] concurrent [operations]
+- **PF-003**: [Resource] usage MUST NOT exceed [limit]
+
+### User Experience Requirements *(include if user-facing)*
+- **UX-001**: Error messages MUST be actionable and user-friendly
+- **UX-002**: State changes MUST provide clear feedback to users
+- **UX-003**: Interface MUST meet WCAG 2.1 Level AA accessibility standards
 
 ### Key Entities *(include if feature involves data)*
 - **[Entity 1]**: [What it represents, key attributes without implementation]
