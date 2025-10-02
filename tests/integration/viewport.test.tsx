@@ -7,7 +7,7 @@
 
 import { describe, it, expect, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 
 // Components and Providers (as used in other integration tests)
 import { Canvas } from '@/src/components/Canvas/Canvas';
