@@ -6,7 +6,7 @@
  */
 
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 // Components and Providers (as used in other integration tests)
@@ -49,15 +49,15 @@ describe('Integration: Viewport - Zoom and Pan', () => {
 			await user.click(zoomInBtn);
 			await user.click(zoomInBtn);
 		} else {
-			await user.wheel(canvas, { deltaY: -120 }); // zoom in
-			await user.wheel(canvas, { deltaY: -120 }); // zoom in more
+			fireEvent.wheel(canvas, { deltaY: -120 }); // zoom in
+			fireEvent.wheel(canvas, { deltaY: -120 }); // zoom in more
 		}
 
 		// Zoom out a step
 		if (zoomOutBtn) {
 			await user.click(zoomOutBtn);
 		} else {
-			await user.wheel(canvas, { deltaY: 120 }); // zoom out
+			fireEvent.wheel(canvas, { deltaY: 120 }); // zoom out
 		}
 
 		// Optional: fit to screen and reset actions
