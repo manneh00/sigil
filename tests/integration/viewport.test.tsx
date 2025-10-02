@@ -83,15 +83,12 @@ describe('Integration: Viewport - Zoom and Pan', () => {
 		const canvas = screen.getByRole('canvas');
 		expect(canvas).toBeInTheDocument();
 
-		// Hold space to activate pan tool; then drag
-		await user.keyboard(' ');
+		// Hold Space during drag using pointer keys syntax, then release
 		await user.pointer([
-			{ target: canvas, coords: { x: 200, y: 200 }, keys: '[Space]' },
-			{ target: canvas, coords: { x: 260, y: 240 }, keys: '[Space]' },
+			{ keys: '[Space>]', target: canvas, coords: { x: 200, y: 200 } },
+			{ target: canvas, coords: { x: 260, y: 240 } },
+			{ keys: '[/Space]' },
 		]);
-
-		// Release space
-		await user.keyboard('{/ }');
 
 		// Placeholder: once implemented, assert pan state via attribute or visible transformation
 		// e.g., expect(canvas).toHaveAttribute('data-pan', expect.stringMatching(/x:\s*60,\s*y:\s*40/))
